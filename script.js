@@ -4,25 +4,6 @@ var userAnswer;
 var currentIndex = 0;
 var startQuiz = document.getElementById("startQuiz");
 
-startQuiz.onclick = startTimer;
-
-function startTimer() {
-  displayQuestion();
-  
-  timer = setInterval(function() {
-    secondsRemaining -= 1;
-    console.log(secondsRemaining);
-    
-    var timerDisplay = document.getElementById("theTimer");
-    timerDisplay.textContent = secondsRemaining;
-    
-    if (secondsRemaining === 0) {
-      clearInterval(timer);
-      // window.location.href = "highscore.html";
-    }
-  }, 1000);
-}
-
 // Quiz Questions put into an index:
 var questions = [
   {
@@ -51,6 +32,26 @@ var questions = [
     answer: "true"
   }
 ];
+
+
+function startTimer() {
+  displayQuestion();
+  
+  timer = setInterval(function() {
+    secondsRemaining -= 1;
+    console.log(secondsRemaining);
+    
+    var timerDisplay = document.getElementById("theTimer");
+    timerDisplay.textContent = secondsRemaining;
+    
+    if (secondsRemaining === 0) {
+      clearInterval(timer);
+      // window.location.href = "highscore.html";
+    }
+  }, 1000);
+}
+
+startQuiz.onclick = startTimer;
 
 var secondsRemaining = questions.length * 15;
 var answer = questions[answer];
@@ -94,9 +95,8 @@ function isCorrectAnswer() {
   if (currentIndex === questions.length) {
     console.log(getScore());
     clearInterval(timer);
-
-    // window.location.href = "highscore.html";
   }
+
   displayQuestion();
   console.log("finish isCorrectAnswer");
 }
@@ -112,7 +112,8 @@ function removeTime() {
 function getScore() {
   return secondsRemaining;
 }
-localStorage.setItem("Score", secondsRemaining);
+// Not sure this will work - just try it out
+// ---------------------------
 
 function getUserInfo() {}
 
@@ -120,35 +121,7 @@ function saveScore() {}
 
 console.log(questions);
 
-// All Quiz Questions
 //----------------------------------------------------------------------------
-var questions = [
-  {
-    title: "Are Java and JavaScript the same language?",
-    choices: ["Yes!", "No.", "Only in Mac.", "What's JavaScript?"],
-    answer: "No."
-  },
-  {
-    title: "Is JavaScript a front-end, back-end, or full-stack programming language?",
-    choices: ["Front-end", "Back-end", "Full-stack", "What's JavaScript?"],
-    answer: "Full-stack"
-  },
-  {
-    title: "Which of the following is not a reserved word in JavaScript?",
-    choices: ["default", "finally", "throw", "undefined"],
-    answer: "undefined"
-  },
-  {
-    title: "True or false... 'Null' is an object.",
-    choices: ["True", "False"],
-    answer: "True"
-  },
-  {
-    title: "What does the following expression return? '!false'",
-    choices: ["null", "true", "undefined", "false"],
-    answer: "true"
-  }
-];
 var userName;
 
 //instead of prompting they need to put there name right onto the page so it can go to local storage then return as a list item.
@@ -163,7 +136,44 @@ function getUserName() {
   }
 }
 
+function getUserScore() {
+  localStorage.setItem("Score", secondsRemaining);
+}
+
 getUserName();
+getUserScore();
+
+// ------------------------------------
+// function scorePoints() {
+//   var points = JSON.parse(localStorage.secondsRemaining || '[]');
+//   var ol = document.getElementById("Score");
+//   ol.innerHTML = '';
+//   for (var i = 0; i < points.length; i++) {
+//       var li = document.createElement('li');
+//       li.textContent = points[i];
+//       ol.appendChild(li);
+//   }
+// }
+// scorePoints();
+
+// -----------------------------
+
+// var highscores = JSON.parse(localStorage.getItem("getScore")) || [];
+
+// submitButton.addEventListener("click", function(event){
+//   event.stopPropagation();
+//   console.log("click");
+  
+//   var userName = inputLine.value;
+//   var secondsRemaining = {userName, secondsRemaining};
+
+
+//   // Send to localStorage
+
+//   highscores.push(secondsRemaining);
+//   localStorage.setItem("highscores", JSON.stringify(highscores));
+
+// });
 
 function displayHighscores() {
   document.getElementById("names").innerHTML = localStorage.getItem("Name");

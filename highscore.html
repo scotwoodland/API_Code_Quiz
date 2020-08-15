@@ -24,14 +24,19 @@
       <div id="scores" class="col-md-4"></div>
     </div>
       <script>
-      function displayHighscores() {
-        document.getElementById("names").innerHTML = localStorage.getItem("Name");
-        document.getElementById("scores").innerHTML = localStorage.getItem("Score");
-      }
+      // function displayHighscores() {
+      //   document.getElementById("names").innerHTML = localStorage.getItem("Name");
+      //   document.getElementById("scores").innerHTML = localStorage.getItem("Score");
+      //  }
 
       displayHighscores();
-        
+        $("#names") = localStorage.getItem("Name");
+        $("#scores") = localStorage.getItem(secondsRemaining);
+      getUserName();
+      getUserScore();
       </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
   </body>
 
   <footer>
