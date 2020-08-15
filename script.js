@@ -18,7 +18,7 @@ function startTimer() {
     
     if (secondsRemaining === 0) {
       clearInterval(timer);
-      window.location.href = "highscore.html";
+      // window.location.href = "highscore.html";
     }
   }, 1000);
 }
@@ -26,29 +26,24 @@ function startTimer() {
 // Quiz Questions put into an index:
 var questions = [
   {
-    title: "The # symbol specifies that the selector is?",
-    choices: ["class", "tags", "id", "css"],
-    answer: "id"
+    title: "Are Java and JavaScript the same language?",
+    choices: ["Yes!", "No.", "Only in Mac.", "What's JavaScript?"],
+    answer: "No."
   },
   {
-    title: "Which HTML tag is used to define an internal style sheet?",
-    choices: ["<css>", "<body>", "<script>", "<style>"],
-    answer: "<style>"
+    title: "Is JavaScript a front-end, back-end, or full-stack programming language?",
+    choices: ["Front-end", "Back-end", "Full-stack", "What's JavaScript?"],
+    answer: "Full-stack"
   },
   {
-    title: "The coding languages Java and JavaScript are the same",
-    choices: ["true", "false"],
-    answer: "false"
+    title: "Which of the following is not a reserved word in JavaScript?",
+    choices: ["default", "finally", "throw", "undefined"],
+    answer: "undefined"
   },
   {
-    title: "An algorithm is:",
-    choices: [
-      "A Dance",
-      "A Selector in js",
-      "A List of steps in order to complete a task",
-      "None of the above"
-    ],
-    answer: "A List of steps in order to complete a task"
+    title: "True or false... 'Null' is an object.",
+    choices: ["True", "False"],
+    answer: "True"
   },
   {
     title: "What does the following expression return? '!false'",
@@ -85,8 +80,6 @@ function displayQuestion() {
   console.log(choices);
 }
 
-//it's removing 15 seconds every other question no matter what the answer is
-//when it console logs it is console logs it incorrectly so something is not lining up
 function isCorrectAnswer() {
   var answer = questions[currentIndex].answer;
   userAnswer = this.innerHTML;
@@ -100,7 +93,9 @@ function isCorrectAnswer() {
   currentIndex++;
   if (currentIndex === questions.length) {
     console.log(getScore());
-    window.location.href = "highscore.html";
+    clearInterval(timer);
+
+    // window.location.href = "highscore.html";
   }
   displayQuestion();
   console.log("finish isCorrectAnswer");
@@ -129,29 +124,24 @@ console.log(questions);
 //----------------------------------------------------------------------------
 var questions = [
   {
-    title: "The # symbol specifies that the selector is?",
-    choices: ["class", "tags", "id", "css"],
-    answer: "id"
+    title: "Are Java and JavaScript the same language?",
+    choices: ["Yes!", "No.", "Only in Mac.", "What's JavaScript?"],
+    answer: "No."
   },
   {
-    title: "Which HTML tag is used to define an internal style sheet?",
-    choices: ["<css>", "<body>", "<script>", "<style>"],
-    answer: "<style>"
+    title: "Is JavaScript a front-end, back-end, or full-stack programming language?",
+    choices: ["Front-end", "Back-end", "Full-stack", "What's JavaScript?"],
+    answer: "Full-stack"
   },
   {
-    title: "The coding languages Java and JavaScript are the same",
-    choices: ["true", "false"],
-    answer: "false"
+    title: "Which of the following is not a reserved word in JavaScript?",
+    choices: ["default", "finally", "throw", "undefined"],
+    answer: "undefined"
   },
   {
-    title: "An algorithm is:",
-    choices: [
-      "A Dance",
-      "A Selector in js",
-      "A List of steps in order to complete a task",
-      "None of the above"
-    ],
-    answer: "A List of steps in order to complete a task"
+    title: "True or false... 'Null' is an object.",
+    choices: ["True", "False"],
+    answer: "True"
   },
   {
     title: "What does the following expression return? '!false'",
@@ -159,10 +149,6 @@ var questions = [
     answer: "true"
   }
 ];
-
-
-// Highscore Screen
-
 var userName;
 
 //instead of prompting they need to put there name right onto the page so it can go to local storage then return as a list item.
@@ -183,5 +169,3 @@ function displayHighscores() {
   document.getElementById("names").innerHTML = localStorage.getItem("Name");
   document.getElementById("scores").innerHTML = localStorage.getItem("Score");
 }
-
-displayHighscores();
