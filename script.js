@@ -1,10 +1,11 @@
+// Setup initial variables for the quiz, timer, and the questions index.
 var myQuiz = $("#quizContainer");
 var timer;
 var userAnswer;
 var currentIndex = 0;
 var startQuiz = document.getElementById("startQuiz");
 
-// Quiz Questions put into an index:
+// Setup the questions in an array format so that we can return the correct buttons for answers. 
 var questions = [
   {
     title: "Are Java and JavaScript the same language?",
@@ -33,7 +34,7 @@ var questions = [
   }
 ];
 
-
+// Setup the countdown timer. 
 function startTimer() {
   displayQuestion();
   
@@ -46,17 +47,18 @@ function startTimer() {
     
     if (secondsRemaining === 0) {
       clearInterval(timer);
-      // window.location.href = "highscore.html";
+      getUserName();
     }
   }, 1000);
 }
 
+// Timer starter button
 startQuiz.onclick = startTimer;
 
 var secondsRemaining = questions.length * 15;
 var answer = questions[answer];
-//display questions in the div
 
+// Setup the question displays for the page 
 function displayQuestion() {
   document.getElementById("quizQuestion").innerHTML = "";
   document.getElementById("card-body").innerHTML = "";
@@ -70,6 +72,7 @@ function displayQuestion() {
   
   var choices = questions[currentIndex].choices;
   
+  // For loop
   for (var i = 0; i < choices.length; i++) {
     var choicesElement = document.createElement("button");
     var cardBody = document.getElementById("card-body");
@@ -77,10 +80,10 @@ function displayQuestion() {
     choicesElement.textContent = choices[i];
     choicesElement.onclick = isCorrectAnswer;
   }
-
   console.log(choices);
 }
 
+// Find answer and determine if it is correct or incorrect 
 function isCorrectAnswer() {
   var answer = questions[currentIndex].answer;
   userAnswer = this.innerHTML;
@@ -101,6 +104,7 @@ function isCorrectAnswer() {
   console.log("finish isCorrectAnswer");
 }
 
+// Add functions for timer and score 
 function addTime() {
   secondsRemaining += 15;
 }
@@ -112,23 +116,19 @@ function removeTime() {
 function getScore() {
   return secondsRemaining;
 }
-// Not sure this will work - just try it out
-// ---------------------------
 
+// Thought I'd need these but didn't. Kept in there just in case.
 function getUserInfo() {}
 
 function saveScore() {}
 
 console.log(questions);
 
-//----------------------------------------------------------------------------
+// Setup return of name and insertion into the localStorage.
 var userName;
 
-//instead of prompting they need to put there name right onto the page so it can go to local storage then return as a list item.
-//this way the table will stay the same when you go to the "get high scores" link
-
 function getUserName() {
-  userName = prompt("Please Enter your Name:");
+  userName = "Welcome " + prompt("Please Enter your Name:");
   localStorage.setItem("Name", userName);
 
   if ((userName = "")) {
@@ -140,42 +140,12 @@ function getUserScore() {
   localStorage.setItem("Score", secondsRemaining);
 }
 
-getUserName();
-getUserScore();
-
-// ------------------------------------
-// function scorePoints() {
-//   var points = JSON.parse(localStorage.secondsRemaining || '[]');
-//   var ol = document.getElementById("Score");
-//   ol.innerHTML = '';
-//   for (var i = 0; i < points.length; i++) {
-//       var li = document.createElement('li');
-//       li.textContent = points[i];
-//       ol.appendChild(li);
-//   }
-// }
-// scorePoints();
-
-// -----------------------------
-
-// var highscores = JSON.parse(localStorage.getItem("getScore")) || [];
-
-// submitButton.addEventListener("click", function(event){
-//   event.stopPropagation();
-//   console.log("click");
-  
-//   var userName = inputLine.value;
-//   var secondsRemaining = {userName, secondsRemaining};
-
-
-//   // Send to localStorage
-
-//   highscores.push(secondsRemaining);
-//   localStorage.setItem("highscores", JSON.stringify(highscores));
-
-// });
-
 function displayHighscores() {
   document.getElementById("names").innerHTML = localStorage.getItem("Name");
   document.getElementById("scores").innerHTML = localStorage.getItem("Score");
 }
+
+// Enable the functions
+getUserScore();
+getUserName();
+displayHighscores();
