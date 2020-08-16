@@ -21,38 +21,38 @@
       <h3 id="theTimer"></h3>
       <br>
     </div>
-
+    
     <div id="quizContainer">
       <div id="startPage">
+        <img id="img1" src="./QuizImage.jpg" alt="Image of a quiz">
         <h1>Think you're keeping up with class?
           <br>
           Try this quiz!</h1>
-        <p>
-          Answer the five JavaScript questions by clicking the appropriate button.
-          <br />
-          If you answer a question incorrectly, 15 seconds will be removed from the timer.
-          <br />
-          The quiz is over when you complete the questions OR the timer runs
-          out.
-          <br />
-          Good luck!
-        </p>
-
-        <div style="text-align: center">
-          <button id="startQuiz">
-          Start Quiz
-          </button>
+          <p>
+            Answer the five JavaScript questions by clicking the appropriate button.
+            <br />
+            If you answer a question incorrectly, 15 seconds will be removed from the timer.
+            <br />
+            The quiz is over when you complete the questions OR the timer runs
+            out.
+            <br />
+            Good luck!
+          </p>
+          
+          <div style="text-align: center">
+            <button id="startQuiz">
+              Start Quiz
+            </button>
+          </div>
+        </div>
+        
+        <div class="card text-center">
+          <div id="quizQuestion"></div>
+          <div id="card-body">
+            <h5 class="theQuestion"></h5> 
+          </div> 
         </div>
       </div>
-
-      <div class="card text-center">
-        <div id="quizQuestion"></div>
-          <div id="card-body">
-              <h5 class="theQuestion"></h5> 
-          </div> 
-      </div>
-    </div>
-
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

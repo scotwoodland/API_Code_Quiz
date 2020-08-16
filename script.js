@@ -1,35 +1,34 @@
 // Setup initial variables for the quiz, timer, and the questions index.
-var myQuiz = $("#quizContainer");
 var timer;
-var userAnswer;
-var currentIndex = 0;
+var theAnswer;
+var questionIndex = 0;
 var startQuiz = document.getElementById("startQuiz");
 
 // Setup the questions in an array format so that we can return the correct buttons for answers. 
 var questions = [
   {
     title: "Are Java and JavaScript the same language?",
-    choices: ["Yes!", "No.", "Only in Mac.", "What's JavaScript?"],
+    options: ["Yes!", "No.", "Only in Mac.", "What's JavaScript?"],
     answer: "No."
   },
   {
     title: "Is JavaScript a front-end, back-end, or full-stack programming language?",
-    choices: ["Front-end", "Back-end", "Full-stack", "What's JavaScript?"],
+    options: ["Front-end", "Back-end", "Full-stack", "What's JavaScript?"],
     answer: "Full-stack"
   },
   {
     title: "Which of the following is not a reserved word in JavaScript?",
-    choices: ["default", "finally", "throw", "undefined"],
+    options: ["default", "finally", "throw", "undefined"],
     answer: "undefined"
   },
   {
     title: "True or false... 'Null' is an object.",
-    choices: ["True", "False"],
+    options: ["True", "False"],
     answer: "True"
   },
   {
     title: "What does the following expression return? '!false'",
-    choices: ["null", "true", "undefined", "false"],
+    options: ["null", "true", "undefined", "false"],
     answer: "true"
   }
 ];
@@ -39,13 +38,13 @@ function startTimer() {
   displayQuestion();
   
   timer = setInterval(function() {
-    secondsRemaining -= 1;
-    console.log(secondsRemaining);
+    secondsLeft -= 1;
+    console.log(secondsLeft);
     
     var timerDisplay = document.getElementById("theTimer");
-    timerDisplay.textContent = secondsRemaining;
+    timerDisplay.textContent = secondsLeft;
     
-    if (secondsRemaining === 0) {
+    if (secondsLeft === 0) {
       clearInterval(timer);
       getUserName();
     }
@@ -55,7 +54,7 @@ function startTimer() {
 // Timer starter button
 startQuiz.onclick = startTimer;
 
-var secondsRemaining = questions.length * 15;
+var secondsLeft = questions.length * 15;
 var answer = questions[answer];
 
 // Setup the question displays for the page 
@@ -64,38 +63,38 @@ function displayQuestion() {
   document.getElementById("card-body").innerHTML = "";
   
   var titleElement = document.createElement("h1");
-  var currentQuestion = questions[currentIndex].title;
+  var currentQuestion = questions[questionIndex].title;
   titleElement.textContent = currentQuestion;
   
   var cardHeader = document.getElementById("quizQuestion");
   cardHeader.appendChild(titleElement);
   
-  var choices = questions[currentIndex].choices;
+  var options = questions[questionIndex].options;
   
   // For loop
-  for (var i = 0; i < choices.length; i++) {
+  for (var i = 0; i < options.length; i++) {
     var choicesElement = document.createElement("button");
     var cardBody = document.getElementById("card-body");
     cardBody.appendChild(choicesElement);
-    choicesElement.textContent = choices[i];
+    choicesElement.textContent = options[i];
     choicesElement.onclick = isCorrectAnswer;
   }
-  console.log(choices);
+  console.log(options);
 }
 
 // Find answer and determine if it is correct or incorrect 
 function isCorrectAnswer() {
-  var answer = questions[currentIndex].answer;
-  userAnswer = this.innerHTML;
+  var answer = questions[questionIndex].answer;
+  theAnswer = this.innerHTML;
 
-  if (userAnswer === answer) {
+  if (theAnswer === answer) {
     console.log("answer correct");
-  } else if (userAnswer !== answer) {
+  } else if (theAnswer !== answer) {
     removeTime();
     console.log("answer incorrect");
   }
-  currentIndex++;
-  if (currentIndex === questions.length) {
+  questionIndex++;
+  if (questionIndex === questions.length) {
     console.log(getScore());
     clearInterval(timer);
   }
@@ -106,15 +105,15 @@ function isCorrectAnswer() {
 
 // Add functions for timer and score 
 function addTime() {
-  secondsRemaining += 15;
+  secondsLeft += 15;
 }
 
 function removeTime() {
-  secondsRemaining -= 15;
+  secondsLeft -= 15;
 }
 
 function getScore() {
-  return secondsRemaining;
+  return secondsLeft;
 }
 
 // Thought I'd need these but didn't. Kept in there just in case.
@@ -137,7 +136,7 @@ function getUserName() {
 }
 
 function getUserScore() {
-  localStorage.setItem("Score", secondsRemaining);
+  localStorage.setItem("Score", secondsLeft);
 }
 
 function displayHighscores() {
