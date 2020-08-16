@@ -78,6 +78,7 @@ function displayQuestion() {
     cardBody.appendChild(choicesElement);
     choicesElement.textContent = options[i];
     choicesElement.onclick = isCorrectAnswer;
+    $("button").css("margin", "20px").css("backgroundColor", "ltgrey").css("fontSize", "40px");
   }
   console.log(options);
 }

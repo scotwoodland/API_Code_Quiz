@@ -15,7 +15,7 @@ a:hover{
 #startQuiz{
     background-color: black;
     color: whitesmoke;
-    width: 800px;
+    width: 50%;
 }
 
 #startQuiz:hover{
@@ -53,6 +53,6 @@ h3{
 
 #img1{
     float: inherit;
-    height: 150px;
+    height: 250px;
     width: auto;
 }
